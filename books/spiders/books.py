@@ -28,4 +28,5 @@ class BooksSpider(scrapy.Spider):
         ).extract_first()
         item['rate'] = response.css('p.price_color ::text').extract_first()
 	item['availability'] = response.css('p.price_color ::text').extract_first()
+	item['instock'] = response.css('p.instock ::text').extract_first()	
         yield item
