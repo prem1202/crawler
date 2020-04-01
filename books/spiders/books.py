@@ -27,5 +27,5 @@ class BooksSpider(scrapy.Spider):
             "//div[@id='product_description']/following-sibling::p/text()"
         ).extract_first()
         item['rate'] = response.css('p.price_color ::text').extract_first()
-		item['availability'] = response.css('p.price_color ::text').extract_first()
+	item['availability'] = response.css('p.price_color ::text').extract_first()
         yield item
