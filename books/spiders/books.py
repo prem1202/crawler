@@ -27,9 +27,9 @@ class BooksSpider(scrapy.Spider):
             "//div[@id='product_description']/following-sibling::p/text()"
         ).extract_first()
 	item['image'] = response.xpath(
-            "//div[@class='thumbnail']/following-sibling::img/@href()"
+            "//div[@class='thumbnail']/following-sibling::img/href()"
         ).extract_first()
         item['rate'] = response.css('p.price_color ::text').extract_first()
 	item['availability'] = response.css('p.price_color ::text').extract_first()
-	item['instock'] = response.css('.instock ::html').extract()
+	item['instock'] = response.css('.instock ::text').extract()
         yield item
