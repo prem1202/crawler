@@ -18,7 +18,5 @@ class BooksSpider(scrapy.Spider):
         item = {}
         product = response.css("div.col10")
         item["product_name"] = product.css("h1 ::text").extract_first()
-        item['brand'] = product.xpath(
-            "//div[@class='-fs14']/following-sibling::a/text()"
-        ).extract_first()
+        item['price'] = product.css("div.-mtxs > span ::text").extract_first()
         yield item
