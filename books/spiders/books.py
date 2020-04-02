@@ -19,6 +19,6 @@ class BooksSpider(scrapy.Spider):
         product = response.css("div.col10")
         item["product_name"] = product.css("h1 ::text").extract_first()
         item['price'] = product.css("div.-mtxs > span ::text").extract_first()
-        item['link'] = response.css(".-gallery > a.link ::attr(href)").extract_first()
+        item['link'] = response.css("a.link ::attr(href)").extract_first()
         item['image'] = response.css("div.col10 > div.-ptxs > div#imgs > a ::attr(href)").extract_first()
         yield item
