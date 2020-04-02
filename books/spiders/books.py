@@ -18,5 +18,5 @@ class BooksSpider(scrapy.Spider):
         item = {}
         product = response.css("div.col10")
         item["product_name"] = product.css("h1 ::text").extract_first()
-        item['brand'] = response.css('span.brand ::text').extract_first()
+        item['brand'] = product.css('span.brand ::text').extract_first()
         yield item
