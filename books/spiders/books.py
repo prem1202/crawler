@@ -11,9 +11,9 @@ class BooksSpider(scrapy.Spider):
     def parse(self, response):
         for product_url in response.css(".-gallery > a ::attr(href)").extract():
             yield scrapy.Request(response.urljoin(product_url), callback=self.products)
-        #next_page = response.css("li.next > a ::attr(href)").extract_first()
-        #if next_page:
-            #yield scrapy.Request(response.urljoin(next_page), callback=self.parse)
+        next_page = response.css("li.item > a ::attr(href)").extract_first()
+        if next_page:
+            yield scrapy.Request(response.urljoin(next_page), callback=self.parse)
 
     def products(self, response):
         item = {}
@@ -25,8 +25,7 @@ class BooksSpider(scrapy.Spider):
         item['brand'] = product.css(".-fs14.-pvxs > a::text").extract()
         item['product_details'] = response.css(".markup.-mhm.-pvl.-oxa::text").extract_first()
         item['key_features'] = response.css(".markup.-pam::text").extract()
-        item['specification'] = response.css(".-pvs.-mvxs.-phm.-lsn > li::text").extract()
-        item['specification2'] = response.css(".-pvs.-mvxs.-phm.-lsn").extract()
+        item['specification'] = response.css(".-pvs.-mvxs.-phm.-lsn").extract()
         item['box_have'] = response.css(".markup.-pam::text").extract_first()
         item['rating'] = response.css(".stars._s._al::text").extract()
         yield item
