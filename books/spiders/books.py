@@ -26,5 +26,6 @@ class BooksSpider(scrapy.Spider):
         item['product_details'] = response.css(".markup.-mhm.-pvl.-oxa::text").extract_first()
         item['key_features'] = response.css(".markup.-pam::text").extract()
         item['specification'] = response.css(".-pvs.-mvxs.-phm.-lsn > li::text").extract()
-        
+        item['specification2'] = response.css(".-pvs.-mvxs.-phm.-lsn").extract()
+        item['box_have'] = response.css(".markup.-pam::text").extract_first()
         yield item
