@@ -6,14 +6,16 @@ class BooksSpider(scrapy.Spider):
     name = 'jumia_bots'
     allowed_domains = ['jumia.com.ng']
     start_urls = [
-        'https://www.jumia.com.ng/laptops/']
+        'https://www.jumia.com.ng/laptops/',
+        'https://www.jumia.com.ng/laptops/?page=2'
+    ]
 
     def parse(self, response):
         for product_url in response.css(".-gallery > a ::attr(href)").extract():
             yield scrapy.Request(response.urljoin(product_url), callback=self.products)
-        next_page = response.css("li.item > a ::attr(href)").extract_first()
-        if next_page:
-            yield scrapy.Request(response.urljoin(next_page), callback=self.parse)
+        #next_page = response.css("li.item > a ::attr(href)").extract_first()
+        #if next_page:
+            #yield scrapy.Request(response.urljoin(next_page), callback=self.parse)
 
     def products(self, response):
         item = {}
