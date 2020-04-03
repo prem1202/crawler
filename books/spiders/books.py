@@ -21,8 +21,7 @@ class BooksSpider(scrapy.Spider):
         item['price'] = product.css("div.-mtxs > span ::text").extract_first()
         item['link'] = response.css(".link::attr(href)").extract_first()
         item['link2'] = response.css(".link::attr(href)").extract()
-        item['image'] = response.css("img::attr(data-src)").extract()
-        item['brand'] = response.css(".brand::text").extract_first()
-        item['brand2'] = response.css("h2.title::text").extract_first()
-        item['brand3'] = product.css(".-fs14.-pvxs > a::text").extract()
+        item['images'] = response.css("img::attr(data-src)").extract()
+        item['brand'] = product.css(".-fs14.-pvxs > a::text").extract()
+        item['product_details'] = response.css(".markup.-mhm.-pvl.-oxa::text").extract_first()
         yield item
