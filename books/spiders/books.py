@@ -28,4 +28,5 @@ class BooksSpider(scrapy.Spider):
         item['specification'] = response.css(".-pvs.-mvxs.-phm.-lsn > li::text").extract()
         item['specification2'] = response.css(".-pvs.-mvxs.-phm.-lsn").extract()
         item['box_have'] = response.css(".markup.-pam::text").extract_first()
+        item['rating'] = response.css(".stars._s._al::text").extract()
         yield item
