@@ -24,5 +24,5 @@ class BooksSpider(scrapy.Spider):
         item['image'] = response.css("img::attr(data-src)").extract()
         item['brand'] = response.css(".brand::text").extract_first()
         item['brand2'] = response.css("h2.title::text").extract_first()
-        item['brand3'] = product.css(".-fs14.-pvxs::text").extract()
+        item['brand3'] = product.css(".-fs14.-pvxs > a::text").extract()
         yield item
