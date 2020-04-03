@@ -5,7 +5,8 @@ import scrapy
 class BooksSpider(scrapy.Spider):
     name = 'jumia_bots'
     allowed_domains = ['jumia.com.ng']
-    start_urls = ['https://www.jumia.com.ng/laptops/']
+    start_urls = [
+        'https://www.jumia.com.ng/laptops/']
 
     def parse(self, response):
         for product_url in response.css(".-gallery > a ::attr(href)").extract():
@@ -20,8 +21,10 @@ class BooksSpider(scrapy.Spider):
         item["product_name"] = product.css("h1 ::text").extract_first()
         item['price'] = product.css("div.-mtxs > span ::text").extract_first()
         item['link'] = response.css("a::attr(href)").extract_first()
-        item['link2'] = response.xpath("/a/text()").extract_first()
         item['images'] = response.css("img::attr(data-src)").extract()
         item['brand'] = product.css(".-fs14.-pvxs > a::text").extract()
         item['product_details'] = response.css(".markup.-mhm.-pvl.-oxa::text").extract_first()
+        item['key_features'] = response.css(".markup.-pam::text").extract_first()
+        item['specification'] = response.css(".-pvs.-mvxs.-phm.-lsn::text").extract_first()
+        
         yield item
