@@ -6,7 +6,7 @@ class BooksSpider(scrapy.Spider):
     name = 'jumia_bots'
     allowed_domains = ['jumia.com.ng']
     start_urls = [
-        'https://www.jumia.com.ng/laptops/'
+        'https://www.jumia.com.ng/home-office/'
     ]
 
     def parse(self, response):
@@ -24,8 +24,8 @@ class BooksSpider(scrapy.Spider):
         item['link'] = response.css("a::attr(href)").extract_first()
         item['images'] = response.css("img::attr(data-src)").extract()
         item['brand'] = product.css(".-fs14.-pvxs > a::text").extract()
-        item['brand2'] = response.css("h2.title > span::text").extract()
-        item['sku'] = response.css(".sku.-gallery::attr(sku)").extract_first()
+        item['brand2'] = response.css("div[class='sku -gallery'] a['class='link'] h2[class='title'] span[class='brand']::text").extract_first()
+        item['sku'] = response.css("div[classs='sku -gallery']::attr(data-sku)").extract_first()
         item['sku2'] = response.css(".sku.-gallery::attr(data-sku)").extract_first()
         item['product_details'] = response.css(".markup.-mhm.-pvl.-oxa::text").extract_first()
         item['key_features'] = response.css(".markup.-pam::text").extract()
