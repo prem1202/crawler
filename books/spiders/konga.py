@@ -2,7 +2,7 @@
 import scrapy
 
 
-class KnogaSpider(scrapy.Spider):
+class BooksSpider(scrapy.Spider):
     name = 'konga_bots'
     allowed_domains = ['konga.com']
     start_urls = [
