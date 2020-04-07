@@ -7,3 +7,6 @@ NEWSPIDER_MODULE = 'books.spiders'
 
 ROBOTSTXT_OBEY = True
 HTTPCACHE_ENABLED = True
+DOWNLOAD_HANDLERS = {
+    'ftp': None,
+}
