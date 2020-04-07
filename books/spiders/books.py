@@ -3,7 +3,7 @@ import scrapy
 
 
 class BooksSpider(scrapy.Spider):
-   name = 'konga_bots'
+    name = 'konga_bots'
     allowed_domains = ['konga.com']
     start_urls = [
         'https://www.konga.com/category/laptops-5230'
