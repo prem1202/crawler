@@ -10,6 +10,7 @@ class BooksSpider(scrapy.Spider):
     ]
 
     def parse(self, response):
+        headers= {'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64; rv:48.0) Gecko/20100101 Firefox/48.0'}
         for product_url in response.css("div._7e903_3FsI6 > a ::attr(href)").extract():
             yield scrapy.Request(response.urljoin(product_url), callback=self.products)
         #next_page = response.css("li.item > a[title='Next'] ::attr(href)").extract_first()
