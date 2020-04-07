@@ -8,7 +8,6 @@ class BooksSpider(scrapy.Spider):
     start_urls = [
         'https://www.konga.com/category/laptops-5230'
     ]
-    handle_httpstatus_list = [403]
     def parse(self, response):
         for product_url in response.css("div._4941f_1HCZm > a ::attr(href)").extract():
             yield scrapy.Request(response.urljoin(product_url), callback=self.products)
