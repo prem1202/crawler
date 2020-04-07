@@ -10,7 +10,7 @@ class BooksSpider(scrapy.Spider):
     ]
 
     def parse(self, response):
-        for product_url in response.css("li > a ::attr(href)").extract():
+        for product_url in response.css("li > div > div.a2cf5_2S5q5.cf5dc_3HhOq > div._7e903_3FsI6 > a ::attr(href)").extract():
             yield scrapy.Request(response.urljoin(product_url), callback=self.products)
         #next_page = response.css("li.item > a[title='Next'] ::attr(href)").extract_first()
         #if next_page:
