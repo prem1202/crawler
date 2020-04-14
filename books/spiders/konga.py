@@ -2,12 +2,12 @@
 import scrapy
 class BooksSpider(scrapy.Spider):
     name = 'new_test'
-    allowed_domains = ['www.kilimall.ng']
+    allowed_domains = ['www.kara.com.ng']
     start_urls = [
-        'https://www.kilimall.ng/new/commoditysearch?c=1746&aside=Tablets&gc_id=1746'
+        'https://www.kara.com.ng/computers-accessories'
     ]
     def parse(self, response):
-        for product_url in response.css("div.grid-content.bg-purple > a ::attr(href)").extract():
+        for product_url in response.css("h2 > a ::attr(href)").extract():
             yield scrapy.Request(response.urljoin(product_url), callback=self.products)
         #next_page = response.css("li.item > a[title='Next'] ::attr(href)").extract_first()
         #if next_page:
@@ -15,6 +15,6 @@ class BooksSpider(scrapy.Spider):
 
     def products(self, response):
         item = {}
-        product = response.css("div.wrap.goods-info.el-col.el-col-13")
-        item["product_name"] = response.css(".title ::text").extract_first()
+        product = response.css("div.product-info-main")
+        item["product_name"] = response.css(".product-item-link ::text").extract_first()
         yield item
